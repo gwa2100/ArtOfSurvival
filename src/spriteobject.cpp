@@ -1,4 +1,5 @@
 #include "spriteobject.h"
+#include "gameobject.h"
 
 
 SpriteObject::~SpriteObject()
@@ -13,7 +14,7 @@ bool SpriteObject::OnRender()
 
 bool SpriteObject::OnUpdate()
 {
-    sprite.move(sf::Vector2f(position.x,position.y));
+    GameObject::MovePosition(GameObject::speed);
     return true;
 }
 

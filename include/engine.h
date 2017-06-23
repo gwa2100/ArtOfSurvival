@@ -29,6 +29,7 @@ class engine
         SpriteObjectPtrVector spriteManager;
         TextureManagerPtrVector textureManager;
         bool run;
+        unsigned int frame;
 
 
         //Test Resources

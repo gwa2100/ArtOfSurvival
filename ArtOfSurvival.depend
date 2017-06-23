@@ -390,11 +390,11 @@
 	<string>
 	<vector>
 
-1497944351 source:f:\projects\artofsurvival\src\gameobject.cpp
+1498114710 source:f:\projects\artofsurvival\src\gameobject.cpp
 	"gameobject.h"
 	<datatype.h>
 
-1497944156 f:\projects\artofsurvival\include\gameobject.h
+1498114710 f:\projects\artofsurvival\include\gameobject.h
 	<datatype.h>
 
 1497944638 f:\projects\artofsurvival\include\datatype.h
@@ -403,8 +403,9 @@
 	<SFML/Graphics.hpp>
 	<engine.h>
 
-1497945108 source:f:\projects\artofsurvival\src\spriteobject.cpp
+1498114834 source:f:\projects\artofsurvival\src\spriteobject.cpp
 	"spriteobject.h"
+	"gameobject.h"
 
 1497945108 f:\projects\artofsurvival\include\spriteobject.h
 	<GameObject.h>
@@ -412,11 +413,11 @@
 	<datatype.h>
 	<vector>
 
-1497943834 source:f:\projects\artofsurvival\src\engine.cpp
+1498115398 source:f:\projects\artofsurvival\src\engine.cpp
 	"engine.h"
 	<iostream>
 
-1497943758 f:\projects\artofsurvival\include\engine.h
+1498116152 f:\projects\artofsurvival\include\engine.h
 	<datatype.h>
 	<gameobject.h>
 	<spriteobject.h>

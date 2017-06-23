@@ -52,3 +52,9 @@ bool GameObject::SetSpeed(Int2D pSpeed)
 {
     speed = pSpeed;
 }
+
+bool GameObject::MovePosition(Int2D pMovement)
+{
+    position.x += pMovement.x;
+    position.y += pMovement.y;
+}

@@ -19,6 +19,7 @@ engine::~engine()
 bool engine::Start()
 {
     run = true;
+    frame = 0;
     Init();
     Loop();
     Shutdown();
@@ -49,6 +50,9 @@ bool engine::Init()
     sf::Texture* createTexture = new sf::Texture();
     createTexture->loadFromFile("buildingTiles_000.png");
     newSprite->SetTexture(createTexture);
+    newSprite->SetDraw();
+    newSprite->SetInput();
+    newSprite->SetUpdate();
     return true;
 }
 
@@ -57,6 +61,7 @@ bool engine::Loop()
     shape->setFillColor(sf::Color::Green);
     while (run)
     {
+        cout << frame++ << endl;
         Input();
         Render();
         Update();
@@ -69,7 +74,15 @@ bool engine::Render()
 {
     window->clear(sf::Color::Black);
     window->draw(*shape);
-    window->draw(*spriteManager.front()->GetSprite());
+    //window->draw(*spriteManager.front()->GetSprite());
+    //render sprites from spritemanager
+    for(auto & value : spriteManager)
+    {
+        if (value->NeedDraw())
+            window->draw(*value->GetSprite());
+    }
+
+
     window->display();
 
 
@@ -80,25 +93,40 @@ bool engine::Input()
 {
     while (window->pollEvent(*event))
     {
+        unsigned int currentEvent;
+        if (event->type == sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+            currentEvent = moveLeft;
+        if (event->type == sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+            currentEvent = moveRight;
+        if (event->type == sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+            currentEvent = moveUp;
+        if (event->type == sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            currentEvent = moveDown;
         if (event->type == sf::Event::Closed)
-            eventBuffer.push(exitGame);
+        {
+            window->close();
+            exit(0);
+        }
+        cout << currentEvent << endl;
+        for(auto & value : spriteManager)
+        {
+            if (value->NeedInput())
+            {
+                value->OnInput(currentEvent);
+            }
+
+        }
     }
     return true;
 }
 
 bool engine::Update()
 {
-    while (!eventBuffer.empty())
+
+    for(auto & value : spriteManager)
     {
-        switch(eventBuffer.front())
-        {
-            case moveUp   : break;
-            case moveDown : break;
-            case moveLeft : break;
-            case moveRight: break;
-            case exitGame : run = false; break;
-        }
-        eventBuffer.pop();
+        if (value->NeedUpdate())
+            value->OnUpdate();
     }
     return true;
 }

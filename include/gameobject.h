@@ -19,6 +19,8 @@ class GameObject
 
         Int2D GetSpeed();
         bool SetSpeed(Int2D pSpeed);
+
+        bool MovePosition(Int2D pMovement);
     protected:
         Int2D position;
         Int2D speed;
